@@ -1,5 +1,6 @@
 package com.gmail.bodziowaty6978.currencyapp.feature_currency.presentation.currencies.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -12,17 +13,22 @@ import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.model.Rate
 @Composable
 fun RateItem(
     itemSize:Int,
-    rate: Rate
+    rate: Rate,
+    onItemClick:(Rate)-> Unit
 ) {
 
     Row(
-        modifier = Modifier.width(itemSize.dp)
+        modifier = Modifier
+            .width(itemSize.dp)
+            .clickable {
+                onItemClick(rate)
+            }
     ) {
         Text(
             text = "${rate.currency} = ${rate.value}",
             style = MaterialTheme.typography.body2,
             modifier =
-                Modifier.padding(vertical = 2.dp)
+                Modifier.padding(vertical = 4.dp)
         )
     }
 

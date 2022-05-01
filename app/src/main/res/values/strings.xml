@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">CurrencyApp</string>
-    <string name="rates">Rates:</string>
+    <string name="rates">Rates for 1€:</string>
 </resources>

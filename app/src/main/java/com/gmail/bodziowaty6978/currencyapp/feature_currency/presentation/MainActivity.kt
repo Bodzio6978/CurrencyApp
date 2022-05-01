@@ -1,4 +1,4 @@
-package com.gmail.bodziowaty6978.currencyapp
+package com.gmail.bodziowaty6978.currencyapp.feature_currency.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.presentation.currencies.CurrenciesScreen
+import com.gmail.bodziowaty6978.currencyapp.feature_currency.presentation.util.Screen
 import com.gmail.bodziowaty6978.currencyapp.ui.theme.CurrencyAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +29,18 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    CurrenciesScreen()
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.CurrenciesScreen.route
+                    ){
+                        composable(
+                            route = Screen.CurrenciesScreen.route
+                        ){
+                            CurrenciesScreen(navController = navController)
+                        }
+                    }
+
                 }
             }
         }

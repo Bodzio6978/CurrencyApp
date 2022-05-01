@@ -29,7 +29,8 @@ import com.google.accompanist.flowlayout.SizeMode
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CurrencyResponseItem(
-    currencyResponse: CurrencyResponse
+    currencyResponse: CurrencyResponse,
+    onRateClicked:(Pair<String,Rate>) -> Unit
 ) {
 
     val scrollState = rememberScrollState()
@@ -64,10 +65,15 @@ fun CurrencyResponseItem(
                 RateItem(
                     rate = Rate(
                         currency = currency,
-                        value = value
+                        value = value,
                     ),
                     // -25 because this layout has combined padding of 25
-                    itemSize = (LocalConfiguration.current.screenWidthDp / 2)-25
+                    itemSize = (LocalConfiguration.current.screenWidthDp / 2)-25,
+                    onItemClick = {
+                        onRateClicked(
+                            Pair(currencyResponse.date,it)
+                        )
+                    }
                 )
             }
 

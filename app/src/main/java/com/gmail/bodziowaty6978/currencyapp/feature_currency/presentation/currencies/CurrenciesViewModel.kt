@@ -13,6 +13,8 @@ import com.gmail.bodziowaty6978.currencyapp.util.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,6 +29,9 @@ class CurrenciesViewModel @Inject constructor(
     private val _loadingState = mutableStateOf<Boolean>(false)
     val loadingState: State<Boolean> = _loadingState
 
+    private val _uiEventFlow = MutableSharedFlow<CurrenciesUiEvent>()
+    val uiEventFlow: SharedFlow<CurrenciesUiEvent> = _uiEventFlow
+
     init {
         getCurrency()
     }
@@ -37,6 +42,17 @@ class CurrenciesViewModel @Inject constructor(
                 _loadingState.value = true
                 CurrentDate.currentDate = CurrentDate.currentDate.minusDays(1)
                 getCurrency()
+            }
+            is CurrenciesEvent.ClickedRate -> {
+                viewModelScope.launch {
+                    _uiEventFlow.emit(
+                        CurrenciesUiEvent.ClickedRate(
+                            date = event.date,
+                            currency = event.rate.currency,
+                            value = event.rate.value
+                        )
+                    )
+                }
             }
         }
     }
@@ -56,6 +72,7 @@ class CurrenciesViewModel @Inject constructor(
                 }
                 is CurrencyResponseState.Error -> {
                     Log.e(TAG,result.message)
+
                 }
             }
             _loadingState.value = false
