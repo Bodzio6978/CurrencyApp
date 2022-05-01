@@ -1,6 +1,6 @@
 package com.gmail.bodziowaty6978.currencyapp.feature_currency.data.data_source
 
-import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.model.CurrencyRates
+import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.model.CurrencyResponse
 import com.gmail.bodziowaty6978.currencyapp.util.Constants
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,5 +13,5 @@ interface CurrencyApi {
     suspend fun getCurrencyResponse(
         @Path("date") date:String,
         @Query("base") base:String,
-    ):Response<CurrencyRates>
+    ):Response<CurrencyResponse>
 }
