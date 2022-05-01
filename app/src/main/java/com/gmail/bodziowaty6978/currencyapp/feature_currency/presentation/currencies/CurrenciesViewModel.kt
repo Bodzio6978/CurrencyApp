@@ -38,7 +38,7 @@ class CurrenciesViewModel @Inject constructor(
 
     fun onEvent(event:CurrenciesEvent){
         when(event){
-            is CurrenciesEvent.ScrolledToTheBottom -> {
+            is CurrenciesEvent.ClickedMoreButton -> {
                 _loadingState.value = true
                 CurrentDate.currentDate = CurrentDate.currentDate.minusDays(1)
                 getCurrency()

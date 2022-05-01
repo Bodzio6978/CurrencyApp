@@ -14,6 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.presentation.currencies.components.CurrencyResponseSection
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.presentation.currencies.components.GreetingsSection
+import com.gmail.bodziowaty6978.currencyapp.feature_currency.presentation.util.Screen
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -31,7 +32,7 @@ fun CurrenciesScreen(
                     scaffoldState.snackbarHostState.showSnackbar(uiEvent.message)
                 }
                 is CurrenciesUiEvent.ClickedRate -> {
-
+                    navController.navigate(Screen.RateScreen.route + "?date=${uiEvent.date}&value=${uiEvent.value.toFloat()}&currency=${uiEvent.currency}")
                 }
             }
         }
