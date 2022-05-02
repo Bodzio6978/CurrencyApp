@@ -4,6 +4,11 @@ buildscript {
         daggerVersion = "2.41"
     }
 
+    repositories {
+        google()
+        mavenCentral()
+    }
+
     dependencies{
         classpath "com.google.dagger:hilt-android-gradle-plugin:$daggerVersion"
         classpath "org.jetbrains.kotlin:kotlin-serialization:1.6.21"

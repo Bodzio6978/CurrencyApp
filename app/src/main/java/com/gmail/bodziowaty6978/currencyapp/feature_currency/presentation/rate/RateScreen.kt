@@ -22,8 +22,6 @@ fun RateScreen(
     navController: NavController
 ) {
 
-    val scaffoldState = rememberScaffoldState()
-
     Scaffold(
         topBar = {
             TopAppBar(
