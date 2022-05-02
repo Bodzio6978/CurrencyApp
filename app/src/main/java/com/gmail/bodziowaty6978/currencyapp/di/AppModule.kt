@@ -6,6 +6,7 @@ import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.repository.C
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.use_cases.CurrencyUseCases
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.use_cases.GetCurrencyResponse
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.use_cases.SortRates
+import com.gmail.bodziowaty6978.currencyapp.feature_currency.presentation.util.Constants
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -22,7 +23,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRetrofitInstance() : Retrofit = Retrofit.Builder()
-        .baseUrl("http://api.exchangeratesapi.io/v1/")
+        .baseUrl(Constants.API_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()

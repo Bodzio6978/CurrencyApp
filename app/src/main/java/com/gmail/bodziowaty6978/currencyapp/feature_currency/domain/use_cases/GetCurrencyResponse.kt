@@ -3,6 +3,7 @@ package com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.use_cases
 import android.util.Log
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.repository.CurrencyRepository
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.util.CurrencyResponseState
+import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.util.OrderType
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.util.RateOrder
 
 class GetCurrencyResponse(

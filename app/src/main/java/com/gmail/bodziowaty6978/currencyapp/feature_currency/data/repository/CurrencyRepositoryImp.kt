@@ -1,8 +1,10 @@
 package com.gmail.bodziowaty6978.currencyapp.feature_currency.data.repository
 
+import android.util.Log
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.data.data_source.CurrencyApi
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.model.CurrencyResponse
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.repository.CurrencyRepository
+import com.gmail.bodziowaty6978.currencyapp.util.TAG
 import retrofit2.Response
 
 class CurrencyRepositoryImp(
@@ -13,6 +15,7 @@ class CurrencyRepositoryImp(
         base: String,
         date: String
     ): Response<CurrencyResponse> {
-        return currencyApi.getCurrencyResponse(base = base, date = date)
+        val response = currencyApi.getCurrencyResponse(base = base, date = date)
+        return response
     }
 }
