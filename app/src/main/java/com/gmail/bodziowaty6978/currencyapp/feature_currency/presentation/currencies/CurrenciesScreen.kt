@@ -29,6 +29,10 @@ fun CurrenciesScreen(
     val orderState = viewModel.rateOrderState.value
 
     LaunchedEffect(key1 = true){
+        viewModel.getCurrency()
+    }
+
+    LaunchedEffect(key1 = true){
         viewModel.uiEventFlow.collectLatest { uiEvent ->
             when(uiEvent){
                 is CurrenciesUiEvent.ShowSnackbar -> {

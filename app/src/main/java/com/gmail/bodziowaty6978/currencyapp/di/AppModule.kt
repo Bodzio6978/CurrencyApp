@@ -41,11 +41,16 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideSortRatesUseCase():SortRates = SortRates()
+
+    @Singleton
+    @Provides
     fun provideCurrencyUseCases(
-        currencyRepository: CurrencyRepository
+        currencyRepository: CurrencyRepository,
+        sortRates: SortRates
     ) = CurrencyUseCases(
-        getCurrencyResponse = GetCurrencyResponse(currencyRepository),
-        sortRates = SortRates()
+        getCurrencyResponse = GetCurrencyResponse(currencyRepository,sortRates),
+        sortRates = sortRates
     )
 
 

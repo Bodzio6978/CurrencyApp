@@ -35,9 +35,6 @@ class CurrenciesViewModel @Inject constructor(
     private val _rateOrderState = mutableStateOf<RateOrderState>(RateOrderState())
     val rateOrderState: State<RateOrderState> = _rateOrderState
 
-    init {
-        getCurrency()
-    }
 
     fun onEvent(event:CurrenciesEvent){
         when(event){
@@ -81,10 +78,11 @@ class CurrenciesViewModel @Inject constructor(
     }
 
 
-    private fun getCurrency(){
+    fun getCurrency(){
         viewModelScope.launch(Dispatchers.IO) {
             val result = currencyUseCases.getCurrencyResponse(
-                date = CurrentDate.currentDate.toString()
+                date = CurrentDate.currentDate.toString(),
+                rateOrder = _rateOrderState.value.rateOrder
             )
             _loadingState.value = true
             when(result){
@@ -96,7 +94,6 @@ class CurrenciesViewModel @Inject constructor(
                 }
                 is CurrencyResponseState.Error -> {
                     Log.e(TAG,result.message)
-
                 }
             }
             _loadingState.value = false

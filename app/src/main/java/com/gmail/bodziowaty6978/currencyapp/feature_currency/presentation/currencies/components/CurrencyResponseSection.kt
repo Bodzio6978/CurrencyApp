@@ -30,6 +30,9 @@ fun CurrencyResponseSection(
                 )
             }
 
+            //Here is a part of code that gets new currency response instantly when user scrolls to the end of list but it's really performance impactful
+            // and I was not able to find a better alternative so I decided to just implement a simple button to get new item
+
 //            if ((currencyResponseItems.size - 1) - listState.firstVisibleItemIndex == listState.layoutInfo.visibleItemsInfo.size - 1&& !isLoading) {
 //                onEvent(CurrenciesEvent.ScrolledToTheBottom)
 //                numberOfItems = listState.firstVisibleItemIndex
