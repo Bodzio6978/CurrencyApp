@@ -3,7 +3,9 @@ package com.gmail.bodziowaty6978.currencyapp.di
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.data.data_source.CurrencyApi
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.data.repository.CurrencyRepositoryImp
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.repository.CurrencyRepository
+import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.use_cases.CurrencyUseCases
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.use_cases.GetCurrencyResponse
+import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.use_cases.SortRates
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -39,9 +41,12 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideGetCurrencyResponseUseCase(
+    fun provideCurrencyUseCases(
         currencyRepository: CurrencyRepository
-    ) = GetCurrencyResponse(currencyRepository)
+    ) = CurrencyUseCases(
+        getCurrencyResponse = GetCurrencyResponse(currencyRepository),
+        sortRates = SortRates()
+    )
 
 
 }

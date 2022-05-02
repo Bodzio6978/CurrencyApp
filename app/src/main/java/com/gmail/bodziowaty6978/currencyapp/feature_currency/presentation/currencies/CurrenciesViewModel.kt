@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.data.singleton.CurrentDate
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.model.CurrencyResponse
+import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.use_cases.CurrencyUseCases
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.use_cases.GetCurrencyResponse
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.util.CurrencyResponseState
 import com.gmail.bodziowaty6978.currencyapp.util.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CurrenciesViewModel @Inject constructor(
-    private val getCurrencyResponse:GetCurrencyResponse
+    private val currencyUseCases:CurrencyUseCases
 ): ViewModel(){
 
     private val _currencyResponseState = mutableStateOf<List<CurrencyResponse>>(emptyList())
@@ -31,6 +31,9 @@ class CurrenciesViewModel @Inject constructor(
 
     private val _uiEventFlow = MutableSharedFlow<CurrenciesUiEvent>()
     val uiEventFlow: SharedFlow<CurrenciesUiEvent> = _uiEventFlow
+
+    private val _rateOrderState = mutableStateOf<RateOrderState>(RateOrderState())
+    val rateOrderState: State<RateOrderState> = _rateOrderState
 
     init {
         getCurrency()
@@ -54,15 +57,36 @@ class CurrenciesViewModel @Inject constructor(
                     )
                 }
             }
+            is CurrenciesEvent.ToggleOrderSection -> {
+                _rateOrderState.value = rateOrderState.value.copy(
+                    isOrderSectionVisible = !rateOrderState.value.isOrderSectionVisible
+                )
+            }
+            is CurrenciesEvent.ChangedOrder -> {
+                viewModelScope.launch(Dispatchers.Default) {
+                    _loadingState.value = true
+                    val currentItems = _currencyResponseState.value.toMutableList()
+                    currentItems.forEach { currencyResponse ->
+                        val rates = currencyResponse.rates.toList().toMutableList()
+                        val sortedRates = currencyUseCases.sortRates(rates = rates, rateOrder = event.rateOrder).toMap()
+                        currencyResponse.rates = sortedRates
+                    }
+                    _rateOrderState.value = rateOrderState.value.copy(
+                        rateOrder = event.rateOrder
+                    )
+                    _loadingState.value = false
+                }
+            }
         }
     }
 
 
     private fun getCurrency(){
         viewModelScope.launch(Dispatchers.IO) {
-            val result = getCurrencyResponse(
+            val result = currencyUseCases.getCurrencyResponse(
                 date = CurrentDate.currentDate.toString()
             )
+            _loadingState.value = true
             when(result){
                 is CurrencyResponseState.Success -> {
                     val currentItems = currencyResponseState.value.toMutableList()

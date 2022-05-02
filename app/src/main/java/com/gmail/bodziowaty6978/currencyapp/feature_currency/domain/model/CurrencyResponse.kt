@@ -13,7 +13,7 @@ data class CurrencyResponse(
     @SerialName("historical")
     val historical: Boolean,
     @SerialName("rates")
-    val rates: Map<String,Double>,
+    var rates: Map<String,Double>,
     @SerialName("success")
     val success: Boolean,
     @SerialName("timestamp")

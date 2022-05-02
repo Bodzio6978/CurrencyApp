@@ -31,7 +31,6 @@ fun CurrencyResponseSection(
             }
 
 //            if ((currencyResponseItems.size - 1) - listState.firstVisibleItemIndex == listState.layoutInfo.visibleItemsInfo.size - 1&& !isLoading) {
-//                Log.e(TAG,listState.layoutInfo.visibleItemsInfo.size.toString())
 //                onEvent(CurrenciesEvent.ScrolledToTheBottom)
 //                numberOfItems = listState.firstVisibleItemIndex
 //                Log.e(TAG, "Scrolled to the bottom")

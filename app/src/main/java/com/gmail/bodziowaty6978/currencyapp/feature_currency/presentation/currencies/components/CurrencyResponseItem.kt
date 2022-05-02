@@ -1,5 +1,6 @@
 package com.gmail.bodziowaty6978.currencyapp.feature_currency.presentation.currencies.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -71,7 +73,11 @@ fun CurrencyResponseItem(
                             value = value,
                         ),
                         // -25 because this layout has combined padding of 25
-                        itemSize = (LocalConfiguration.current.screenWidthDp / 2)-25,
+                        itemSize = if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE){
+                            (LocalConfiguration.current.screenWidthDp / 4)-25
+                        }else{
+                            (LocalConfiguration.current.screenWidthDp / 2)-25
+                        },
                         onItemClick = {
                             onCurrencyResponseEvent(
                                 CurrenciesEvent.ClickedRate(currencyResponse.date,it)
@@ -91,10 +97,12 @@ fun CurrencyResponseItem(
                     .padding(top = 5.dp, bottom = 15.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .background(Purple200)
-                    .padding(5.dp)
+                    .padding(vertical = 5.dp, horizontal = 10.dp)
                     .clickable {
                         onCurrencyResponseEvent(CurrenciesEvent.ClickedMoreButton)
-                    }
+                    },
+                style = MaterialTheme.typography.body2,
+                color = Color.Black
 
             )
         }

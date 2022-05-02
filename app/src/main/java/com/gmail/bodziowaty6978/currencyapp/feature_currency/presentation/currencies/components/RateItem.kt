@@ -6,6 +6,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.gmail.bodziowaty6978.currencyapp.feature_currency.domain.model.Rate
@@ -28,7 +29,9 @@ fun RateItem(
             text = "${rate.currency} = ${rate.value}",
             style = MaterialTheme.typography.body2,
             modifier =
-                Modifier.padding(vertical = 4.dp)
+                Modifier.padding(vertical = 4.dp),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
     }
 
