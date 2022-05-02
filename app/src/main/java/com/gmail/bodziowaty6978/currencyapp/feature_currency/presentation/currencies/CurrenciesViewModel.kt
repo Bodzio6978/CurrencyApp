@@ -93,6 +93,9 @@ class CurrenciesViewModel @Inject constructor(
                     _currencyResponseState.value = currentItems
                 }
                 is CurrencyResponseState.Error -> {
+                    _uiEventFlow.emit(
+                        CurrenciesUiEvent.ShowSnackbar(result.message)
+                    )
                     Log.e(TAG,result.message)
                 }
             }
