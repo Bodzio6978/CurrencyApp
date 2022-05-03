@@ -15,11 +15,25 @@ Project that displays over 150 currencies rates in comparison with EURO. It supp
 
 ## Screenshots 
 
-![presentation](https://github.com/Bodzio6978/CurrencyApp/blob/main/screenshots/presentation.jpg?raw=true "General look of the app")
-![loading](https://github.com/Bodzio6978/CurrencyApp/blob/main/screenshots/loading.jpg?raw=true "Loading currencies infinitely")
-![landscape](https://github.com/Bodzio6978/CurrencyApp/blob/main/screenshots/landscape.jpg?raw=true "Support for landscape mode")
-![sorting](https://github.com/Bodzio6978/CurrencyApp/blob/main/screenshots/sorting.jpg?raw=true "Sorting feature for rates")
-![rate](https://github.com/Bodzio6978/CurrencyApp/blob/main/screenshots/rate.jpg?raw=true "Single rate display)
+### General look of the app
+
+<img src="https://github.com/Bodzio6978/CurrencyApp/blob/main/screenshots/presentation.jpg" width="256"/>
+
+### Loading currencies infinitely
+
+<img src="https://github.com/Bodzio6978/CurrencyApp/blob/main/screenshots/loading.jpg" width="256"/>
+
+### Support for a landscape mode
+
+<img src="https://github.com/Bodzio6978/CurrencyApp/blob/main/screenshots/landscape.jpg" width="256"/>
+
+### Sorting feautre for rates
+
+<img src="https://github.com/Bodzio6978/CurrencyApp/blob/main/screenshots/sorting.jpg" width="256"/>
+
+### Display a single rate for a specific day
+
+<img src="https://github.com/Bodzio6978/CurrencyApp/blob/main/screenshots/rate.jpg" width="256"/>
 
 
 ## Features I could consider adding in a future
